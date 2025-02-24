@@ -1,10 +1,12 @@
-import {JSX} from "react";
-import {Outlet} from "react-router";
+import { JSX } from "react";
+import { Outlet } from "react-router";
+import { Sidebar } from "../components /sidebar";
 
-export const Layout = ():JSX.Element => {
-    return (
-            <main>
-                <Outlet />
-            </main>
-    )
-}
+export const Layout = (): JSX.Element => {
+  return (
+    <main className="h-screen grid grid-cols-3">
+      <Sidebar />
+      <Outlet />
+    </main>
+  );
+};
