@@ -1,10 +1,9 @@
+import { useContext } from "react";
 import { Search } from "../components /search";
-import { SelectLocationProvicer } from "../context/SelectLocationProvider";
+import { SelectLocationContext } from "../context/SelectLocationProvider";
 
 export const SearchPage = () => {
-  return (
-    <SelectLocationProvicer>
-      <Search />
-    </SelectLocationProvicer>
-  );
+  const { selectLocation } = useContext(SelectLocationContext);
+  console.log(selectLocation, "select location");
+  return <Search />;
 };

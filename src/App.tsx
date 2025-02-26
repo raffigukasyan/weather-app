@@ -1,9 +1,12 @@
 import AppRouter from "./app/routes.tsx";
+import { SelectLocationProvicer } from "./context/SelectLocationProvider.tsx";
 
 function App() {
   return (
-    <AppRouter />
-  )
+    <SelectLocationProvicer>
+      <AppRouter />
+    </SelectLocationProvicer>
+  );
 }
 
-export default App
+export default App;

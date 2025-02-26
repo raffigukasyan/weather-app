@@ -1,14 +1,18 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSearchLocation } from "../hooks/fetch/useSearchLocation";
-
+import { Oval } from "react-loader-spinner";
+import { SelectLocationContext } from "../context/SelectLocationProvider";
+import { useNavigate } from "react-router";
 export const Search = () => {
   const [value, setValue] = useState<string>("");
 
   const { isOpen, locations, loading, error } = useSearchLocation(value);
-
+  const navigate = useNavigate("");
+  const { setSelectLocation } = useContext(SelectLocationContext);
   console.log("render");
+
   return (
     <div className="relative">
       <div className="flex gap-x-3 bg-zinc-200/30 px-3 py-3 rounded-xl">
@@ -19,6 +23,15 @@ export const Search = () => {
           className="w-full placeholder:border-none focus:outline-none"
           type="text"
           placeholder="Search location"
+        />
+        <Oval
+          visible={loading}
+          height="25"
+          width="25"
+          color="blue"
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
         />
       </div>
       <AnimatePresence>
@@ -33,7 +46,10 @@ export const Search = () => {
             {error && <span>{error}</span>}
             {locations?.map((location) => (
               <div
-                //onClick={() => handleSelect(location)}
+                onClick={() => {
+                  navigate(`/weather/lat=${location.lat}&lon=${location.lon}`);
+                  //setSelectLocation({ name: "sdsd" });
+                }}
                 className="cursor-pointer hover:bg-zinc-200/30 p-2 rounded-2xl"
               >
                 {location.name}
