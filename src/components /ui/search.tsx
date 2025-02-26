@@ -1,16 +1,16 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from "motion/react";
 import { useContext, useState } from "react";
-import { useSearchLocation } from "../hooks/fetch/useSearchLocation";
+import { useSearchLocation } from "../../hooks/fetch/useSearchLocation.tsx";
 import { Oval } from "react-loader-spinner";
-import { SelectLocationContext } from "../context/SelectLocationProvider";
+import { SelectLocationContext } from "../../context/SelectLocationProvider.tsx";
 import { useNavigate } from "react-router";
 export const Search = () => {
   const [value, setValue] = useState<string>("");
 
   const { isOpen, locations, loading, error } = useSearchLocation(value);
   const navigate = useNavigate("");
-  const { setSelectLocation } = useContext(SelectLocationContext);
+  // const { setSelectLocation } = useContext(SelectLocationContext);
   console.log("render");
 
   return (
@@ -47,7 +47,7 @@ export const Search = () => {
             {locations?.map((location) => (
               <div
                 onClick={() => {
-                  navigate(`/weather/lat=${location.lat}&lon=${location.lon}`);
+                  navigate(`/weather/?lat=${location.lat}&lon=${location.lon}`);
                   //setSelectLocation({ name: "sdsd" });
                 }}
                 className="cursor-pointer hover:bg-zinc-200/30 p-2 rounded-2xl"

@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { getWheather, searchLocation } from "../../api/request";
-import { SelectLocationContext } from "../../context/SelectLocationProvider";
-import { redirect } from "react-router";
+import { useEffect, useState } from "react";
+import {  searchLocation } from "../../api/request";
 
 export const useSearchLocation = (value: string) => {
   const [locations, setLocations] = useState<unknown>([]);
@@ -9,7 +7,6 @@ export const useSearchLocation = (value: string) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
-  const { setSelectLocation } = useContext(SelectLocationContext);
   const fetchSearchLocation = async () => {
     try {
       const response = await searchLocation(value);
