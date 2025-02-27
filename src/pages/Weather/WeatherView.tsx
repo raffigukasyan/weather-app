@@ -6,11 +6,10 @@ import { useDataChart } from "../../hooks/weather/useDataChart.tsx";
 export const WeatherView = () => {
   const weather = useLoaderData();
   const data = useDataChart(weather.list);
-  console.log(weather);
   return (
-    <div className={"px-5 py-8"}>
+    <div className={"w-full px-5 py-8"}>
       <TodaysDate />
-      <div className={"w-full h-[700px]"}>
+      <div className={"w-full  h-[300px]"}>
         <WeatherChart data={data} />
       </div>
     </div>

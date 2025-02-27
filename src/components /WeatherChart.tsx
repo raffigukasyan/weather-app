@@ -1,26 +1,41 @@
-import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import {JSX} from "react";
+import {
+  Area,
+  AreaChart,
+  CartesianAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { JSX } from "react";
 
-export const WeatherChart = ({data}):JSX.Element => {
-
-
-    return (
-        <ResponsiveContainer width={"100%"} height={"100%"}>
-            <AreaChart width={500}
-            height={300}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-            data={data}>
-                <CartesianGrid strokeDasharray={"3 3"}/>
-                <XAxis dataKey={"day"} />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey={"temp"} stroke="#8884d8" fill="#8884d8" />
-            </AreaChart>
-        </ResponsiveContainer>
-    )
-}
+export const WeatherChart = ({ data }): JSX.Element => {
+  return (
+    <ResponsiveContainer width={"100%"} height={"100%"}>
+      <AreaChart width={400} height={100} data={data}>
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#C8D2D6" stopOpacity={1} />
+            <stop offset="95%" stopColor="#C8D2D6" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid vertical={false} strokeDasharray={" 2 2 "} />
+        <XAxis tickMargin={5} dataKey={"day"} />
+        <YAxis tickMargin={5} tickFormatter={(value) => `${value}°`} />
+        <Tooltip />
+        <Area
+          activeDot={{ r: 8, fill: "#2F68FD" }}
+          baseValue={"dataMin"}
+    
+          type="bump"
+          dataKey={"temp"}
+          stroke="#2A4C7F"
+          strokeWidth={5}
+          fill="url(#colorUv)"
+          fillOpacity={1}
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+};

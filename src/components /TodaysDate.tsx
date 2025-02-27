@@ -7,7 +7,7 @@ export const TodaysDate = ():JSX.Element => {
     const fullDate =  currentDate.toLocaleDateString(undefined, {month: "short", weekday: "long", year: "numeric"});
     console.log(month, 'month')
     return (
-        <div>
+        <div className='mb-20'>
             <h3 className={'text-3xl font-bold mb-2 text-gray-600'}>{month} {year}</h3>
             <span className={'text-base text-stone-500/50'}>{fullDate}</span>
         </div>

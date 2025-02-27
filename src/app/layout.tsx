@@ -4,7 +4,7 @@ import { Sidebar } from "../components /ui/sidebar.tsx";
 
 export const Layout = (): JSX.Element => {
   return (
-    <main className="h-screen grid grid-cols-3">
+    <main className="h-screen flex">
       <Sidebar />
       <Outlet />
     </main>
