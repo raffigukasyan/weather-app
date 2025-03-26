@@ -1,11 +1,18 @@
-import { useEffect, useState } from "react";
-import {  searchLocation } from "../../api/request";
+import { useContext, useEffect, useState } from "react";
+import { searchLocation } from "../../api/request";
+import { SelectLocationContext } from "../../context/SelectLocationProvider";
+import { useNavigate } from "react-router";
 
 export const useSearchLocation = (value: string) => {
   const [locations, setLocations] = useState<unknown>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>();
+  const navigate = useNavigate("");
+
+  //const { selectLocation, setSelectLocation } = useContext(
+  //  SelectLocationContext
+  //);
 
   const fetchSearchLocation = async () => {
     try {
@@ -37,18 +44,20 @@ export const useSearchLocation = (value: string) => {
     return () => clearTimeout(handle);
   }, [value]);
 
-  //const handleSelect = (location) => {
-  //  const { lat, lon } = location;
-  //  return redirect(`/weather/lat=${lat}&lon=${lon}`);
-  //  //try {
-  //  //  const { data } = await getWheather(lat, lon);
-  //  //  console.log(data, " data");
-  //  //  setSelectLocation(data});
-  //  //  setIsOpen(false);
-  //  //} catch (e) {
-  //  //  console.log(e);
-  //  //}
-  //};
+  const handleSelect = (location) => {
+    const { lat, lon } = location;
+    navigate(`/?lat=${lat}&lon=${lon}`);
+    setIsOpen(false);
+    //setSelectLocation({ lat, lon });
+    //try {
+    //  const { data } = await getWheather(lat, lon);
+    //  console.log(data, " data");
+    //  setSelectLocation(data});
+    //  setIsOpen(false);
+    //} catch (e) {
+    //  console.log(e);
+    //}
+  };
 
-  return { locations, loading, error, isOpen };
+  return { locations, loading, error, isOpen, handleSelect };
 };
