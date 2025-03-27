@@ -1,11 +1,8 @@
 import { ForecastResponse } from "@/types/Weather/forecast";
 import { fetchFiveForecast } from "../../api/request";
+import { isWeather } from "@/utils/isWeather";
 
-const isWeather = (dt1: number, dt2: number): boolean => {
-  return Math.floor(dt1 / 86400) === Math.floor(dt2 / 86400);
-};
-
-export const useFetchForecast = async (
+export const mapFiveForecast = async (
   lat: string,
   lon: string
 ): Promise<ForecastResponse> => {

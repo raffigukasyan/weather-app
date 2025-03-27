@@ -18,7 +18,7 @@ export const searchLocation = async (
   }
 };
 
-export const getFiveForecast = async (
+export const fetchFiveForecast = async (
   lat: string,
   lon: string
 ): Promise<AxiosResponse<ForecastResponse>> => {
@@ -35,7 +35,7 @@ export const getFiveForecast = async (
   }
 };
 
-export const getCurrentForecast = async (
+export const fetchCurrentForecast = async (
   lat: string,
   lon: string
 ): Promise<AxiosResponse<CurrentWeatherResponse>> => {
@@ -45,7 +45,7 @@ export const getCurrentForecast = async (
         import.meta.env.VITE_API_KEY
       }&units=metric`
     );
-    return response;
+    return response.data;
   } catch (e: Error | unknown) {
     console.log(e);
     throw e;

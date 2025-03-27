@@ -1,11 +1,12 @@
+import { WeatherLocation } from "@/types/shared/locations";
 import { AnimatePresence, motion } from "motion/react";
 import { FC } from "react";
 
 interface ISearchDropdownProps {
   isOpen: boolean;
-  locations: { name: string; lat: number; lon: number }[];
-  error: string | null;
-  onSelect: (location: { name: string; lat: number; lon: number }) => void;
+  locations: WeatherLocation[];
+  error?: string;
+  onSelect: (location: WeatherLocation) => void;
 }
 
 export const SearchDropDown: FC<ISearchDropdownProps> = ({

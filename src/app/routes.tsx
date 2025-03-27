@@ -8,7 +8,6 @@ export default function AppRouter() {
       path: "/",
       element: <Home />,
       loader: HomeLoader,
-      HydrateFallback: () => <div>sadasd</div>,
       //children: [
       //  {
       //    path: "/search",

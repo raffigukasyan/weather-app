@@ -8,8 +8,7 @@ export const Search = () => {
 
   const { isOpen, locations, loading, error, handleSelect } =
     useSearchLocation(value);
-  //
-  // const { setSelectLocation } = useContext(SelectLocationContext);
+
   console.log("render");
 
   return (

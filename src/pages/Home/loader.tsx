@@ -1,15 +1,21 @@
-import { useFetchCurrentForecast } from "../../hooks/weather/useFetchCurrentForecast";
-import { useFetchForecast } from "../../hooks/weather/useFetchForecast";
+import { mapFiveForecast } from "@/api/mappers/mapFiveForecast";
 
-export async function HomeLoader({ request }) {
+import { fetchCurrentForecast } from "@/api/request";
+
+export async function HomeLoader({ request }: { request: Request }) {
   const url = new URL(request.url);
-  const lat: string = url.searchParams.get("lat");
-  const lon: string = url.searchParams.get("lon");
+  const lat = url.searchParams.get("lat");
+  const lon = url.searchParams.get("lon");
 
-  //await new Promise((resolve) => setTimeout(resolve, 5000));
+  if (!lat || !lon) {
+    return {
+      error: "Укажите город или нажмите на кнопку локации",
+      forecastFiveDays: null,
+      currentForecast: null,
+    };
+  }
+  const forecastFiveDays = mapFiveForecast(lat, lon);
+  const currentForecast = fetchCurrentForecast(lat, lon);
 
-  const forecastFiveDays = await useFetchForecast(lat, lon);
-  const currentForecast = await useFetchCurrentForecast(lat, lon);
-
-  return { forecastFiveDays, currentForecast };
+  return { forecastFiveDays, currentForecast, error: null };
 }

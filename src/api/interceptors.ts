@@ -5,7 +5,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error?.response?.status;
-    console.log("dddd");
+  
     if (status) {
       switch (status) {
         case 400:
