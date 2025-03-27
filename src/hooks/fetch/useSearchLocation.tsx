@@ -1,30 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { searchLocation } from "../../api/request";
-import { SelectLocationContext } from "../../context/SelectLocationProvider";
 import { useNavigate } from "react-router";
 
+import { WeatherLocation } from "@/types/shared/locations";
+
 export const useSearchLocation = (value: string) => {
-  const [locations, setLocations] = useState<unknown>([]);
+  const [locations, setLocations] = useState<WeatherLocation[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>();
-  const navigate = useNavigate("");
+  const navigate = useNavigate();
 
-  //const { selectLocation, setSelectLocation } = useContext(
-  //  SelectLocationContext
-  //);
-
-  const fetchSearchLocation = async () => {
+  const fetchSearchLocation = async (value: string) => {
     try {
       const response = await searchLocation(value);
-      const data = response.data.map((el) => {
-        const { local_names, ...newData } = el;
-        return newData;
-      });
+
+      const data = response.data.map(
+        ({ local_names, country, ...rest }) => rest
+      );
       setLocations([...data]);
     } catch (e) {
       setError("Нету данных");
-      throw e;
     } finally {
       setIsOpen(true);
       setLoading(false);
@@ -39,24 +35,15 @@ export const useSearchLocation = (value: string) => {
     }
     setLoading(true);
     const handle = setTimeout(() => {
-      fetchSearchLocation();
+      fetchSearchLocation(value);
     }, 2000);
     return () => clearTimeout(handle);
   }, [value]);
 
-  const handleSelect = (location) => {
+  const handleSelect = (location: WeatherLocation) => {
     const { lat, lon } = location;
     navigate(`/?lat=${lat}&lon=${lon}`);
     setIsOpen(false);
-    //setSelectLocation({ lat, lon });
-    //try {
-    //  const { data } = await getWheather(lat, lon);
-    //  console.log(data, " data");
-    //  setSelectLocation(data});
-    //  setIsOpen(false);
-    //} catch (e) {
-    //  console.log(e);
-    //}
   };
 
   return { locations, loading, error, isOpen, handleSelect };

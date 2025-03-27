@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { Home } from "../pages/home";
-import { HomeLoader } from "../pages/loader";
+import { Home } from "../pages/Home/home";
+import { HomeLoader } from "../pages/Home/loader";
 
 export default function AppRouter() {
   const routes = createBrowserRouter([
@@ -8,7 +8,7 @@ export default function AppRouter() {
       path: "/",
       element: <Home />,
       loader: HomeLoader,
-      fallbackElement: <div>dsadasd</div>,
+      HydrateFallback: () => <div>sadasd</div>,
       //children: [
       //  {
       //    path: "/search",
@@ -22,6 +22,5 @@ export default function AppRouter() {
       //],
     },
   ]);
-
   return <RouterProvider router={routes} />;
 }
