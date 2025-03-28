@@ -10,7 +10,7 @@ export type ForecastItem = {
   dt_txt: string;
   pop: number;
   visibility: number;
-  weather: WeatherCondition;
+  weather: WeatherCondition[];
   main: MainWeather;
   sys: ForecastSys;
   clouds: Clouds;

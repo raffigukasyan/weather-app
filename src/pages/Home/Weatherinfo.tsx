@@ -1,18 +1,23 @@
-import { Suspense } from "react";
-import { Await } from "react-router";
+import { WeeklyPanel } from "@/components /WeatherWeek/WeeklyPanel";
+import { ForecastResponse } from "@/types/Weather/forecast";
+import { CurrentWeatherResponse } from "@/types/Weather/weather";
 
-export const WeatherInfo = () => {
+interface WeatherInfoProps {
+  forecastFiveDays: Promise<ForecastResponse> | null;
+  currentForecast: Promise<CurrentWeatherResponse> | null;
+  error: string | null;
+}
+
+export const WeatherInfo = ({
+  forecastFiveDays,
+  currentForecast,
+  error,
+}: WeatherInfoProps) => {
   return (
-    <section className="w-full bg-gray-200/50">
-      {/*<Suspense fallback={<div>dfasfsdf</div>}>
-        <Await resolve={Promise.all([forecastFiveDays, currentForecast])}>
-          {([forecast, current]) => {
-            return (
-              <Info forecastFiveDays={forecast} currentForecast={current} />
-            );
-          }}
-        </Await>
-      </Suspense>*/}
+    <section className="w-full px-30 py-10 bg-[rgb(247,246,249)]">
+      {!error && forecastFiveDays ? (
+        <WeeklyPanel forecastFiveDays={forecastFiveDays} />
+      ) : null}
     </section>
   );
 };

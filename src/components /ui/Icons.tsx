@@ -1,4 +1,4 @@
-import { SunIcon } from "@heroicons/react/24/outline";
+import { SunIcon } from "@/components /Icons/SunIcon";
 import { PressureIcon } from "../Icons/PressureIIcon";
 import { FC, JSX } from "react";
 import { RainIcon } from "../Icons/RainIcon";
@@ -25,7 +25,7 @@ export const Icon: FC<IIconProps> = ({ type, className }): JSX.Element => {
     sun: <SunIcon className={className} />,
     rain: <RainIcon className={className} />,
     wind: <WindIcon className={className} />,
-    "01d": <SkyIcon className={className} />,
+    "01d": <SunIcon className={className} />,
     "02d": <FewClouds className={className} />,
     "03d": <CloudIcon className={className} />,
     "04d": <BrokenClouds className={className} />,
